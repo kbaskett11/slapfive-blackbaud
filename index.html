@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SlapFive for Blackbaud — Program Overview</title>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Merriweather+Sans:wght@300;400;500&family=Poppins:ital,wght@0,400;0,500;0,700;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue:      #002C5F;
+    --orange:    #F37822;
+    --aqua:      #5EC9C4;
+    --pink:      #E45E9D;
+    --white:     #FFFFFF;
+    --off:       #F5F7FA;
+    --lb:        #E8EEF6;
+    --mid:       #5A6A7E;
+    --rule:      #D8E2EE;
+    --ink:       #0A1929;
+    --green:     #1a7a4a;
+    --green-bg:  #e6f4ed;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--white);
+    font-family: 'Merriweather Sans', sans-serif;
+    color: var(--ink);
+    max-width: 960px;
+    margin: 0 auto;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--blue);
+    padding: 48px 60px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header::after {
+    content: '';
+    position: absolute;
+    right: -80px; top: -80px;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(94,201,196,.12) 0%, transparent 70%);
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .logo {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    color: rgba(255,255,255,.8);
+    margin-bottom: 28px;
+  }
+
+  .logo span { color: var(--orange); }
+
+  .eyebrow {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--aqua);
+    margin-bottom: 10px;
+  }
+
+  .header h1 {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 12px;
+  }
+
+  .header h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--aqua);
+  }
+
+  .header-sub {
+    font-size: 13px;
+    font-weight: 300;
+    color: rgba(255,255,255,.65);
+    line-height: 1.65;
+    max-width: 480px;
+  }
+
+  .for-pill {
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 6px;
+    padding: 22px 28px;
+    min-width: 200px;
+    text-align: center;
+    align-self: center;
+  }
+
+  .for-pill-label {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,.4);
+    margin-bottom: 10px;
+  }
+
+  .for-pill-name {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .for-pill-sub {
+    font-size: 11px;
+    color: rgba(255,255,255,.55);
+    line-height: 1.5;
+  }
+
+  /* ── GOALS STRIP ── */
+  .goals-strip {
+    background: linear-gradient(90deg, var(--orange) 0%, var(--pink) 100%);
+    padding: 20px 60px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 0;
+  }
+
+  .goal-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 16px 0 0;
+    border-right: 1px solid rgba(255,255,255,.25);
+  }
+
+  .goal-item:last-child { border-right: none; padding-right: 0; }
+  .goal-item:first-child { padding-left: 0; }
+
+  .goal-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.7);
+    flex-shrink: 0;
+  }
+
+  .goal-text {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--white);
+    line-height: 1.35;
+  }
+
+  /* ── BODY ── */
+  .body { display: grid; grid-template-columns: 1fr 1fr; }
+
+  .col { padding: 36px 60px; }
+  .col-left { border-right: 1px solid var(--rule); }
+  .col-top { border-bottom: 1px solid var(--rule); }
+
+  .sec-eye {
+    font-family: 'Poppins', sans-serif;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .sec-title {
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--blue);
+    line-height: 1.3;
+    margin-bottom: 18px;
+  }
+
+  .sec-title em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--mid);
+  }
+
+  p { color: var(--mid); margin-bottom: 12px; }
+  p:last-child { margin-bottom: 0; }
+  p strong { color: var(--ink); font-weight: 600; }
+
+  /* Use-case cards */
+  .uc-list { display: flex; flex-direction: column; gap: 0; }
+
+  .uc-item {
+    display: grid;
+    grid-template-columns: 28px 1fr;
+    gap: 12px;
+    padding: 13px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .uc-item:last-child { border-bottom: none; }
+
+  .uc-icon {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  .uc-icon.orange { background: #FEF0E6; color: var(--orange); }
+  .uc-icon.aqua   { background: #E6F8F7; color: #2aaa9e; }
+  .uc-icon.pink   { background: #FCE8F3; color: var(--pink); }
+  .uc-icon.blue   { background: var(--lb); color: var(--blue); }
+  .uc-icon.green  { background: var(--green-bg); color: var(--green); }
+
+  .uc-content strong {
+    display: block;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 3px;
+  }
+
+  .uc-content span {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* Callout */
+  .callout {
+    background: var(--lb);
+    border-left: 3px solid var(--blue);
+    padding: 13px 16px;
+    border-radius: 0 4px 4px 0;
+    margin: 16px 0;
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .callout strong { color: var(--blue); }
+  .callout.orange { background: #FEF3E6; border-left-color: var(--orange); }
+  .callout.orange strong { color: #c06010; }
+  .callout.green { background: var(--green-bg); border-left-color: var(--green); }
+  .callout.green strong { color: var(--green); }
+
+  /* Proof strip */
+  .proof-strip {
+    grid-column: 1 / -1;
+    background: var(--blue);
+    padding: 28px 60px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 28px;
+  }
+
+  .proof-item { display: flex; flex-direction: column; gap: 5px; }
+
+  .proof-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--orange);
+    line-height: 1;
+  }
+
+  .proof-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,.65);
+    line-height: 1.5;
+  }
+
+  .proof-desc strong { color: var(--white); font-weight: 500; }
+
+  /* Integration grid */
+  .int-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .int-item {
+    padding: 9px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .int-item:nth-child(odd) { padding-right: 16px; }
+
+  .int-item:nth-child(even) {
+    padding-left: 16px;
+    border-left: 1px solid var(--rule);
+  }
+
+  .int-label {
+    font-family: 'Fira Sans', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--blue);
+    margin-bottom: 1px;
+  }
+
+  .int-values { font-size: 11px; color: var(--mid); }
+
+  /* Timeline */
+  .phase-list { display: flex; flex-direction: column; gap: 0; }
+
+  .phase {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+
+  .phase:last-child { border-bottom: none; }
+
+  .phase-num {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--white);
+    background: var(--orange);
+    border-radius: 3px;
+    padding: 3px 8px;
+    text-align: center;
+    align-self: flex-start;
+    margin-top: 2px;
+    white-space: nowrap;
+  }
+
+  .phase-num.phase2 { background: var(--aqua); color: var(--blue); }
+  .phase-num.phase3 { background: var(--blue); }
+
+  .phase-content strong {
+    display: block;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 12.5px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 3px;
+  }
+
+  .phase-content span {
+    font-size: 11.5px;
+    color: var(--mid);
+    line-height: 1.5;
+  }
+
+  /* Differentiators */
+  .diff-item {
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .diff-item:last-child { border-bottom: none; }
+
+  .diff-item strong {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+
+  .diff-item strong::before {
+    content: '';
+    width: 7px; height: 7px;
+    background: var(--aqua);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .diff-item span {
+    font-size: 12px;
+    color: var(--mid);
+    line-height: 1.55;
+    padding-left: 15px;
+    display: block;
+  }
+
+  /* Quote */
+  .quote-block {
+    background: var(--off);
+    border-left: 3px solid var(--aqua);
+    padding: 14px 18px;
+    border-radius: 0 4px 4px 0;
+    margin-top: 16px;
+  }
+
+  .quote-block p {
+    font-family: 'Poppins', sans-serif;
+    font-style: italic;
+    font-weight: 300;
+    font-size: 12px;
+    color: var(--ink);
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .quote-block cite {
+    display: block;
+    font-family: 'Poppins', sans-serif;
+    font-style: normal;
+    font-size: 10.5px;
+    font-weight: 500;
+    color: var(--mid);
+    margin-top: 7px;
+  }
+
+  /* SOC badge */
+  .soc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: var(--lb);
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+    padding: 5px 11px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 9px;
+    font-weight: 500;
+    color: var(--blue);
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .soc-badge::before {
+    content: '✓';
+    background: var(--blue);
+    color: var(--white);
+    border-radius: 50%;
+    width: 14px; height: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 8px;
+    flex-shrink: 0;
+  }
+
+  /* Footer */
+  .footer {
+    grid-column: 1 / -1;
+    background: var(--off);
+    border-top: 1px solid var(--rule);
+    padding: 22px 60px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 28px;
+  }
+
+  .footer-text strong {
+    display: block;
+    font-family: 'Fira Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--blue);
+    margin-bottom: 4px;
+  }
+
+  .footer-text p { font-size: 12px; color: var(--mid); line-height: 1.55; max-width: 480px; margin: 0; }
+
+  .cta-btn {
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Poppins', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 11px 22px;
+    border-radius: 3px;
+    text-decoration: none;
+    white-space: nowrap;
+    display: block;
+    text-align: center;
+    margin-bottom: 6px;
+  }
+
+  .footer-url {
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    color: var(--mid);
+    text-align: center;
+    letter-spacing: .5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-grid">
+    <div>
+      <div class="logo">Slap<span>Five</span></div>
+      <div class="eyebrow">Prepared for Blackbaud</div>
+      <h1>Powering the next era of<br>your <em>Champions program</em></h1>
+      <p class="header-sub">A purpose-built platform to connect advocacy to revenue, scale advocate identification, unify your tech stack, and give Christine, Annie, Nicole, and leadership a single source of truth for every customer influence moment.</p>
+    </div>
+    <div class="for-pill">
+      <div class="for-pill-label">Designed for</div>
+      <div class="for-pill-name">Blackbaud</div>
+      <div class="for-pill-sub">Champions Program<br>Customer Marketing &amp; Advocacy</div>
+    </div>
+  </div>
+</div>
+
+<!-- GOALS STRIP -->
+<div class="goals-strip">
+  <div class="goal-item"><div class="goal-dot"></div><div class="goal-text">Connect advocacy to revenue</div></div>
+  <div class="goal-item"><div class="goal-dot"></div><div class="goal-text">Scale advocate identification with AI</div></div>
+  <div class="goal-item"><div class="goal-dot"></div><div class="goal-text">Vanilla community integration</div></div>
+  <div class="goal-item"><div class="goal-dot"></div><div class="goal-text">Referrals as a growth lever</div></div>
+  <div class="goal-item"><div class="goal-dot"></div><div class="goal-text">Eliminate tool silos</div></div>
+</div>
+
+<!-- BODY -->
+<div class="body">
+
+  <!-- TOP LEFT: Revenue Attribution -->
+  <div class="col col-left col-top">
+    <div class="sec-eye">Revenue Attribution</div>
+    <h2 class="sec-title">Prove Champions program impact <em>in Salesforce</em></h2>
+
+    <p>SlapFive's revenue influence engine lives natively inside Salesforce — so your CRO, CMO, and CS leadership see advocacy impact where they already work, in the language they care about.</p>
+
+    <div class="uc-list">
+      <div class="uc-item">
+        <div class="uc-icon orange">$</div>
+        <div class="uc-content">
+          <strong>Win rate impact dashboard</strong>
+          <span>See exactly how much more often opportunities close when a customer is involved — broken down by activity type (reference call, story viewed, referral submitted).</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon aqua">↻</div>
+        <div class="uc-content">
+          <strong>Renewal and expansion attribution</strong>
+          <span>With 40% of contracts up for renewal in the next 18 months, track customer influence on renewal and expansion deals separately — giving Nicole's team quantifiable credit for what they drive.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon blue">◎</div>
+        <div class="uc-content">
+          <strong>Webinar and event influence tracking</strong>
+          <span>Customers speaking in lead-generating webinars are tracked as Salesforce campaign members — any influenced opportunity is automatically attributed to the program with full audit trail.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon pink">★</div>
+        <div class="uc-content">
+          <strong>Advocate leaderboard and influence scoring</strong>
+          <span>Weighted influence scoring surfaces your most impactful advocates — including LinkedIn follower reach, referrals submitted, and revenue influenced — helping Christine prioritize the right relationships.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon green">↗</div>
+        <div class="uc-content">
+          <strong>Job change revenue tracking</strong>
+          <span>When an advocate leaves and brings Blackbaud to their new company, SlapFive automatically logs it as a revenue influence event — capturing value that's currently invisible.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout green" style="margin-top:18px;">
+      <strong>For leadership:</strong> Customers who implement SlapFive's revenue influence reporting have used these dashboards to secure headcount increases and expanded program budgets — by showing the C-suite the exact dollar impact of their advocacy programs.
+    </div>
+  </div>
+
+  <!-- TOP RIGHT: AI + Advocate Identification -->
+  <div class="col col-top">
+    <div class="sec-eye">AI-Powered Advocate Identification</div>
+    <h2 class="sec-title">Find Champions <em>before they raise their hand</em></h2>
+
+    <p>SlapFive's AI engine monitors signals across your full customer ecosystem — Gainsight health scores, Pendo product utilization, Gong call recordings, and Vanilla community activity — to identify advocates proactively.</p>
+
+    <div class="uc-list">
+      <div class="uc-item">
+        <div class="uc-icon orange">⚡</div>
+        <div class="uc-content">
+          <strong>Gong call mining — themed sweeps</strong>
+          <span>Configure weekly AI sweeps for specific themes — Blackbaud's AI and innovation story, product value outcomes, renewal sentiment. SlapFive extracts matching moments, surfaces them for review, and triggers the right next step automatically.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon aqua">◈</div>
+        <div class="uc-content">
+          <strong>Predictive advocacy scoring</strong>
+          <span>A composite score built from Gainsight health, Pendo utilization, Gong sentiment, and community engagement surfaces the right candidates — with human-in-the-loop approval before any outreach is sent.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon pink">✦</div>
+        <div class="uc-content">
+          <strong>LinkedIn influence scoring via Clay</strong>
+          <span>Ingest LinkedIn follower data and influence signals from Clay (or directly via SlapFive's LinkedIn integration) to score and prioritize advocates for speaking opportunities, CABs, and executive engagement.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon blue">◎</div>
+        <div class="uc-content">
+          <strong>AI Co-Pilot — natural language search</strong>
+          <span>Ask SlapFive's MCP: "Find five customers who own Raiser's Edge NXT and would be great speakers at our summer event." It cross-references all customer data, explains why each is a fit, and adds them to a campaign in seconds.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block">
+      <p>"I'd love to do a weekly sweep — especially for our AI and innovation story. Being able to configure what we're listening for and have that surface automatically is exactly what we need."</p>
+      <cite>Nicole Dingley, Director of Retention Engagement Marketing, Blackbaud</cite>
+    </div>
+  </div>
+
+  <!-- PROOF STRIP -->
+  <div class="proof-strip">
+    <div class="proof-item">
+      <div class="proof-num">$1M+</div>
+      <div class="proof-desc"><strong>per quarter</strong> in referral revenue generated by customers using SlapFive's referral engine embedded in their community</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">90 days</div>
+      <div class="proof-desc"><strong>faster time to close</strong> — advocacy-influenced deals close at 2.5x the rate of uninfluenced deals, per SlapFive customer data</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">30%+</div>
+      <div class="proof-desc"><strong>win rate lift</strong> on opportunities where customer advocacy was part of the sales motion — tracked directly in Salesforce</div>
+    </div>
+    <div class="proof-item">
+      <div class="proof-num">30 days</div>
+      <div class="proof-desc"><strong>to go live</strong> — SlapFive's prescriptive onboarding gets core use cases live in the first month, well ahead of your September milestone</div>
+    </div>
+  </div>
+
+  <!-- BOTTOM LEFT: Vanilla + Community Integration -->
+  <div class="col col-left col-top">
+    <div class="sec-eye">Higher Logic Vanilla Integration</div>
+    <h2 class="sec-title">Turn your community into a <em>Champions engine</em></h2>
+
+    <p>SlapFive embeds a personalized Advocacy Hub directly inside your Vanilla community — no separate login, no competing destination. Every member sees opportunities curated specifically for them based on their profile, product ownership, and lifecycle stage.</p>
+
+    <div class="uc-list">
+      <div class="uc-item">
+        <div class="uc-icon orange">◐</div>
+        <div class="uc-content">
+          <strong>Personalized advocacy opportunities</strong>
+          <span>Each logged-in community member sees only the opportunities relevant to them — based on product, health score, activity preferences, and engagement history. The chief development officer sees different prompts than a day-to-day product user.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon aqua">▣</div>
+        <div class="uc-content">
+          <strong>Gamification that aggregates everything</strong>
+          <span>Points, tiers, and badges reflect advocacy completed anywhere — reference calls, referrals, webinar speaking, community activity. SlapFive is the aggregator; Vanilla displays the result. Your tier names and thresholds are fully customizable.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon blue">↔</div>
+        <div class="uc-content">
+          <strong>For senior advocates outside the community</strong>
+          <span>Executives and CDOs who aren't active in Vanilla get a personalized standalone page — pushed to them monthly via email, no login required. They see their points, upcoming opportunities, and advocacy history on demand.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon pink">✦</div>
+        <div class="uc-content">
+          <strong>Progressive profiling at scale</strong>
+          <span>Capture advocacy preferences through progressive community prompts — no 150-question form. Over time, members self-select activity types (reference calls, speaking, referrals) which automatically suppresses them from asks they've opted out of.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout orange">
+      <strong>Coming soon:</strong> Higher Logic Vanilla is launching its own MCP this quarter — both MCPs will connect, giving SlapFive full context from within the community to power even more precise advocate identification and activation.
+    </div>
+  </div>
+
+  <!-- BOTTOM RIGHT: Referrals + Lifecycle -->
+  <div class="col col-top">
+    <div class="sec-eye">Referrals + Lifecycle Advocacy</div>
+    <h2 class="sec-title">Scale the program <em>without scaling the team</em></h2>
+
+    <p>SlapFive automates advocacy at the moments in the customer lifecycle when it's most likely to be welcomed — and tracks every referral, story, and interaction all the way to closed revenue.</p>
+
+    <div class="uc-list">
+      <div class="uc-item">
+        <div class="uc-icon orange">↗</div>
+        <div class="uc-content">
+          <strong>Modern Referral Program (embedded in Vanilla)</strong>
+          <span>Customers share a branded Referral Board — their own success story — rather than giving names for cold outreach. Referrals arrive warm, attribution is automatic, and the advocate relationship is preserved. Full Marketo integration included.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon aqua">⚙</div>
+        <div class="uc-content">
+          <strong>Lifecycle trigger automation</strong>
+          <span>Post-renewal, post-onboarding milestone (via Gainsight), NPS 9–10 — SlapFive fires the right advocacy ask automatically. Annie and Christine define the triggers once; the program runs in the background without manual lift.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon blue">◎</div>
+        <div class="uc-content">
+          <strong>Multi-product data model</strong>
+          <span>SlapFive's dynamic data model supports Blackbaud's full product taxonomy — nested product hierarchies, vertical-specific segments, and all the complexity of an enterprise nonprofit tech stack — in a single system of record.</span>
+        </div>
+      </div>
+      <div class="uc-item">
+        <div class="uc-icon pink">✓</div>
+        <div class="uc-content">
+          <strong>Influitive migration support</strong>
+          <span>SlapFive has migrated many customers off Influitive — including historical activity data, points balances, and member profiles. Your Champions program history comes with you. Referrals and core use cases can be live within 30 days.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-top:16px;">
+      <strong>Target go-live: Before mid-September</strong> — SlapFive's 30-day onboarding plan covers the data model workshop, Salesforce integration, Vanilla embed, referral workflow setup, and Gainsight/Pendo connections. Well within your timeline.
+    </div>
+  </div>
+
+  <!-- INTEGRATION ROW -->
+  <div class="col col-left col-top">
+    <div class="sec-eye">Integrations</div>
+    <h2 class="sec-title">Fits your <em>existing stack</em></h2>
+    <div class="int-grid">
+      <div class="int-item"><div class="int-label">CRM</div><div class="int-values">Salesforce (native app)</div></div>
+      <div class="int-item"><div class="int-label">Community</div><div class="int-values">Higher Logic Vanilla</div></div>
+      <div class="int-item"><div class="int-label">Customer Success</div><div class="int-values">Gainsight (bidirectional)</div></div>
+      <div class="int-item"><div class="int-label">Product Analytics</div><div class="int-values">Pendo</div></div>
+      <div class="int-item"><div class="int-label">Revenue Intelligence</div><div class="int-values">Gong (AI-powered)</div></div>
+      <div class="int-item"><div class="int-label">Marketing Automation</div><div class="int-values">Marketo</div></div>
+      <div class="int-item"><div class="int-label">References (Phase 2)</div><div class="int-values">Reference Edge (API)</div></div>
+      <div class="int-item"><div class="int-label">Enrichment</div><div class="int-values">Clay / LinkedIn</div></div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="soc-badge">SOC II Certified</div>
+      <p style="font-size:11.5px; color:var(--mid); line-height:1.6;">Per-customer secure AI instance — your data is never shared across instances. Purpose-built AI on Google Gemini, not a generic ChatGPT wrapper. Human-in-the-loop controls on all AI-generated outreach.</p>
+    </div>
+  </div>
+
+  <!-- IMPLEMENTATION TIMELINE -->
+  <div class="col col-top">
+    <div class="sec-eye">Implementation Timeline</div>
+    <h2 class="sec-title">Live in <em>30 days</em> — well before September</h2>
+
+    <div class="phase-list">
+      <div class="phase">
+        <div class="phase-num">Month 1</div>
+        <div class="phase-content">
+          <strong>Strategy Roadmap + Core Go-Live</strong>
+          <span>Strategy workshop, data model workshop, Salesforce integration (hours, not days), Vanilla embed, advocate data migration from Influitive, referral workflow setup, Gainsight + Pendo connections.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num phase2">Month 2</div>
+        <div class="phase-content">
+          <strong>Advanced Integrations + AI Activation</strong>
+          <span>Gong AI sweep configuration (themes defined with Annie and Christine), LinkedIn/Clay enrichment, lifecycle trigger automation, Marketo referral lead flow, full revenue influence reporting live in Salesforce.</span>
+        </div>
+      </div>
+      <div class="phase">
+        <div class="phase-num phase3">Phase 2</div>
+        <div class="phase-content">
+          <strong>Reference Management</strong>
+          <span>When Blackbaud moves off Reference Edge, SlapFive's reference management engine (seller requests in Salesforce, auto-matching, fulfillment tracking) is ready to activate — and Reference Edge data migrates via API.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top:16px;">
+      <p>"We have a very prescriptive onboarding process. All customers get access to a shared project management portal — both teams see deadlines. We call it VIFAM: Value in the First Month."</p>
+      <cite>Kaily Baskett, VP of Growth, SlapFive</cite>
+    </div>
+  </div>
+
+  <!-- WHY SLAPFIVE -->
+  <div class="col col-left">
+    <div class="sec-eye">Why SlapFive</div>
+    <h2 class="sec-title">Three things <em>no competitor delivers together</em></h2>
+
+    <div class="diff-item">
+      <strong>Lifecycle marketing — not just reference tracking</strong>
+      <span>SlapFive was purpose-built around customer lifecycle marketing. It's why Nicole's renewal and retention goals, Annie's campaign workflows, and Christine's revenue attribution all live in one platform — not three.</span>
+    </div>
+    <div class="diff-item">
+      <strong>Enterprise-grade data model for complex products</strong>
+      <span>Blackbaud's multi-product taxonomy across nonprofit verticals is exactly what SlapFive's dynamic data model was built for. No spreadsheet workarounds — every product, every advocate, every signal in one system.</span>
+    </div>
+    <div class="diff-item">
+      <strong>Proven AI that keeps humans in the loop</strong>
+      <span>SlapFive's AI is purpose-built on your data — not a generic model. Every AI-suggested action has an approval step. Your team stays in control of every customer touchpoint while the automation handles the scale.</span>
+    </div>
+
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-text">
+      <strong>Ready to move forward?</strong>
+      <p>Next steps: reference calls with comparable customers, security and AI review documentation, and a strategy session to map Blackbaud's specific lifecycle triggers and workflows. SlapFive is ready to partner.</p>
+    </div>
+    <div>
+      <a class="cta-btn" href="https://meetings.hubspot.com/kaily-baskett?uuid=0d8eac4e-7e3a-4028-ae07-39c2c2305d5b" target="_blank">Book a follow-up</a>
+      <div class="footer-url">slapfive.com</div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
